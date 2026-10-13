@@ -14,12 +14,23 @@ repo is served exactly as it is written.
 | `notes/notes.css` | — | Shared styling for the notes section |
 | `404.html` | any unmatched address | Custom "page not found" page |
 
-## Before the first deploy
+## Canonical addresses
 
-Both real pages declare `https://maryionseo.github.io/` as their canonical address, in
-`<link rel="canonical">` and `og:url`. **A canonical that doesn't match the address the
-site actually serves from is worse than having none** — it tells search engines the wrong
-thing confidently. Update both files to the real URL before or immediately after going live.
+One page can be reached at several addresses — with and without `www`, over `http` and
+`https`, at the `github.io` address and at the custom domain. The `<link rel="canonical">`
+tag in each page's `<head>` names which one is official, so search engines treat them as a
+single page rather than several copies.
+
+`index.html` and `notes/index.html` currently declare `https://maryionseo.com/`.
+
+**This becomes wrong the moment the custom domain goes live.** When `maryionseo.com` is
+serving the site, update the canonical and `og:url` in both files to match:
+
+    cd ~/Desktop/maryion-site && grep -rl "maryionseo.github.io" . \
+      | xargs sed -i '' 's|https://maryionseo.com|https://maryionseo.com|g'
+
+Then re-upload the two changed files. Not before — a canonical pointing at a domain that
+isn't answering yet is worse than one pointing at a working address you plan to retire.
 
 ## Previewing locally
 
