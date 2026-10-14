@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Notes — Maryion</title>
-<meta name="description" content="A running log of learning SEO on a real site: what I changed, what I expected, and what actually happened. The first note is being written.">
-<link rel="canonical" href="https://maryionseo.com/notes/">
+<title>Maryion — learning SEO by doing</title>
+<meta name="description" content="Hey, I’m Maryion. A site I made to learn SEO, documenting a real, ongoing attempt — real decisions, real results, and real adjustments as they happen.">
+<link rel="canonical" href="https://maryionseo.com/">
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://maryionseo.com/notes/">
-<meta property="og:title" content="Notes — Maryion">
-<meta property="og:description" content="A running log of learning SEO on a real site: what I changed, what I expected, and what actually happened. The first note is being written.">
+<meta property="og:url" content="https://maryionseo.com/">
+<meta property="og:title" content="Maryion — learning SEO by doing">
+<meta property="og:description" content="Hey, I’m Maryion. A site I made to learn SEO, documenting a real, ongoing attempt — real decisions, real results, and real adjustments as they happen.">
 <meta property="og:locale" content="en">
+<!-- switch to summary_large_image once an og:image exists -->
 <meta name="twitter:card" content="summary">
 
 <meta name="theme-color" content="#1A1A1A">
@@ -20,23 +21,220 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="notes.css">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": "https://maryionseo.com/notes/#notes",
-  "name": "Notes",
-  "description": "A running log of learning SEO on a real site.",
-  "url": "https://maryionseo.com/notes/",
-  "inLanguage": "en",
-  "isPartOf": { "@id": "https://maryionseo.com/#website" },
-  "author": { "@id": "https://maryionseo.com/#maryion" }
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://maryionseo.com/#maryion",
+      "name": "Maryion",
+      "description": "Learning search engine optimization by doing, and keeping a public record of it.",
+      "knowsAbout": ["Search engine optimization", "Technical SEO", "Content strategy"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://maryionseo.com/#website",
+      "url": "https://maryionseo.com/",
+      "name": "Maryion",
+      "description": "A site made to learn SEO, documenting a real, ongoing attempt — published for educational purposes.",
+      "inLanguage": "en",
+      "author": { "@id": "https://maryionseo.com/#maryion" }
+    }
+  ]
 }
 </script>
 
-<script src="../analytics.js" defer></script>
+<style>
+  :root {
+    --ink:      #1A1A1A;
+    --raised:   #232323;
+    --lemon:    #F6EB61;
+    --amber:    #F9C74F;
+    --grey:     #A8A8A8;
+    --paper:    #F9F9F9;
+
+    --measure: 60ch;
+    --edge: clamp(1.5rem, 6vw, 7.5rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: Archivo, system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--lemon);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--lemon);
+    color: var(--ink);
+    padding: .75rem 1.25rem;
+    font-weight: 600;
+    z-index: 10;
+  }
+  .skip:focus { left: 0; }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem) var(--edge) 0;
+  }
+
+  .wordmark {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    text-decoration: none;
+  }
+  .wordmark::after {
+    content: "";
+    display: inline-block;
+    width: .375rem;
+    height: .375rem;
+    margin-left: .3125rem;
+    border-radius: 50%;
+    background: var(--lemon);
+    vertical-align: .0625em;
+  }
+
+  .masthead nav a {
+    font-size: .9375rem;
+    font-weight: 500;
+    color: var(--grey);
+    text-decoration: none;
+    text-underline-offset: .3em;
+  }
+  .masthead nav a:hover { color: var(--paper); text-decoration: underline; }
+
+  /* ---------- hero ---------- */
+
+  main {
+    /* the masthead sits above main, so discount its height from the first screen */
+    min-height: calc(100svh - 4.6rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero {
+    flex: 1;
+    padding: clamp(2.25rem, 6vh, 4rem) var(--edge);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  h1 {
+    margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(3.25rem, 11vw, 8.5rem);
+    font-weight: 600;
+    line-height: .92;
+    letter-spacing: -.04em;
+  }
+
+  .lede {
+    max-width: var(--measure);
+    margin: 0 0 1.375rem;
+    font-family: Newsreader, Georgia, serif;
+    font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.72;
+    color: #E4E4E4;
+  }
+  .lede:last-of-type { margin-bottom: clamp(2.25rem, 4vw, 3rem); }
+
+  .cta {
+    display: inline-block;
+    padding: .9375rem 1.75rem;
+    border-radius: .5rem;
+    background: var(--lemon);
+    color: var(--ink);
+    font-size: .9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .18s ease;
+  }
+  .cta:hover { background: var(--amber); }
+
+  /* ---------- curve ---------- */
+
+  .curve {
+    display: block;
+    flex: none;
+    width: 100%;
+    height: clamp(7rem, 21vh, 12.5rem);
+  }
+
+  /* ---------- footer ---------- */
+
+  .colophon {
+    padding: 2.25rem var(--edge) 2.75rem;
+    background: var(--amber);
+    color: var(--ink);
+    font-size: .875rem;
+    font-weight: 500;
+  }
+
+  .disclaimer {
+    max-width: 54ch;
+    margin: 0 0 1.375rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .colophon-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.5rem;
+    justify-content: space-between;
+    padding-top: 1.125rem;
+    border-top: 1px solid rgba(26,26,26,.25);
+  }
+
+  /* ---------- responsive ---------- */
+
+
+  /* ---------- one load sequence ---------- */
+
+  @media (prefers-reduced-motion: no-preference) {
+    .settle {
+      animation: settle .7s cubic-bezier(.22,.68,.3,1) backwards;
+    }
+    .settle-1 { animation-delay: .05s; }
+    .settle-2 { animation-delay: .17s; }
+    .settle-3 { animation-delay: .29s; }
+
+    @keyframes settle {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+</style>
+
+<script src="analytics.js" defer></script>
 </head>
 
 <body>
@@ -44,36 +242,36 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="masthead">
-  <a class="wordmark" href="../index.html">Maryion</a>
+  <a class="wordmark" href="index.html">Maryion</a>
   <nav aria-label="Sections">
-    <a href="index.html" aria-current="page">Notes</a>
+    <a href="notes/index.html">Notes</a>
   </nav>
 </header>
 
 <main id="main">
+  <div class="hero">
 
-  <h1 class="page-title">Notes</h1>
+      <h1 class="settle settle-1">About</h1>
 
-  <p class="standfirst">Each note will be one round of the same loop: change something, say what I
-  expected, then come back and write down what actually happened.</p>
+      <p class="lede settle settle-2">Hey, I’m Maryion. This is a site that I made to learn Search
+      Engine Optimization (SEO) and it documents a real, ongoing attempt to learn SEO — the practice
+      of structuring and improving a website so that search engines like Google can find it,
+      understand it, and surface it to the people actually searching for what it offers.</p>
 
-  <div class="empty">
-    <h2>There aren’t any notes yet.</h2>
+      <p class="lede settle settle-2">Everything here reflects genuine work in progress: real decisions,
+      real results, and real adjustments as they happen. The goal is simple — learn by doing, and keep
+      an honest record of it.</p>
 
-    <p>That’s on purpose, and it’s the honest state of things. I put this site online before writing
-    anything about it, because I wanted to find out how publishing actually works first — buying a
-    domain, pointing it somewhere, getting it to load for someone other than me. There’s no point
-    writing about a process I haven’t been through yet.</p>
+      <a class="cta settle settle-3" href="notes/index.html">Read the notes</a>
 
-    <p>So this page exists so that the link you clicked goes somewhere real instead of nowhere. The
-    first note goes here once the site has been up long enough to have something true to say about it.</p>
-
-    <p class="next"><strong>Note 01, in progress:</strong> what it took to get the first page online,
-    and everything I got wrong doing it.</p>
   </div>
 
-  <a class="back" href="../index.html">← Back to the about page</a>
-
+  <svg class="curve" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path fill="#F6EB61"
+          d="M0 62C400 18 920 44 1440 92v108H0z"/>
+    <path fill="#1A1A1A"
+          d="M0 172C430 146 910 74 1440 50v46C980 122 490 192 0 200z"/>
+  </svg>
 </main>
 
 <footer class="colophon">
